@@ -1,0 +1,10 @@
+<section class="benefits" aria-labelledby="benefits-title">
+      <div class="benefits-header">
+        <div>
+          <h2 id="benefits-title" class="title">Benefits</h2>
+          <p class="desc">
+            hebat
+          </p>
+        </div>
+        <a href="#" class="viewall">View All</a>
+      </div>
