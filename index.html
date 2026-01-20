@@ -2,721 +2,249 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GlobalTalk</title>
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+  
   <style>
-    :root{
-      --primary:#2b9aa7;
-      --bs-primary: #2b9aa7;
-      --bs-primary-rgb: 43, 154, 167;
-    }
-    
-    body{
-      font-family: Inter, system-ui, sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* Nav */
-    .navbar {
-      padding: 1.25rem 0;
-      margin-bottom: 0;
-    }
-    .navbar-brand {
-      font-family: Poppins, sans-serif;
-      font-weight: 800;
-      font-size: 24px;
-      color: #111;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    .navbar-nav {
-      gap: 0.5rem;
-    }
-    .navbar-nav .nav-link {
-      color: #333;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      transition: color 0.2s ease;
-    }
-    .navbar-nav .nav-link:hover {
-      color: var(--primary);
-    }
-    .dropdown-toggle::after {
-      margin-left: 0.5rem;
-    }
-    .btn-login {
-      color: #111;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      transition: color 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-    .btn-login:hover {
-      color: var(--primary);
-    }
-    .btn-signup {
-      background: var(--primary);
-      color: #fff;
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(43, 154, 167, 0.25);
-      transition: all 0.3s ease;
-      border: none;
-    }
-    .btn-signup:hover {
-      background: #248a95;
-      box-shadow: 0 6px 16px rgba(43, 154, 167, 0.35);
-      transform: translateY(-2px);
-      color: #fff;
-    }
-
-    /* Hero Desktop */
-    .hero-section {
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding: 4rem 0 3rem;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-    .hero-left img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .hero-left .svg-headline {
-      max-width: 580px;
-      margin-bottom: 30px;
-    }
-    .hero-left .svg-buttons {
-      max-width: 360px;
-      margin-bottom: 40px;
-    }
-    .hero-left .svg-stats {
-      max-width: 450px;
-    }
-    
-    /* Desktop Visuals */
-    .hero-visuals {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      width: 50%;
-      height: 100%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      overflow: visible;
-    }
-    .hero-visuals-mobile {
-      display: none;
-    }
-    
-    .frames-stack {
-      position: absolute;
-      top: 50%;
-      left: 5%;
-      width: 360px;
-      transform: translateY(-50%);
-      z-index: 10;
-    }
-    .svg-frame {
-      width: 100%;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
-      display: block;
-    }
-    .hero-visuals .controller,
-    .hero-visuals-mobile .controller {
-      position: absolute;
-      top: 15%;
-      left: 15%;
-      width: 180px;
-      z-index: 110;
-      filter: blur(4px);
-      opacity: 0.9;
-      transform: rotate(-25deg);
-    }
-    .hero-visuals .plant,
-    .hero-visuals-mobile .plant {
-      position: absolute;
-      bottom: -5%;
-      right: -5%;
-      width: 400px;
-      max-width: 45%;
-      z-index: 160;
-      filter: blur(8px) saturate(0.92) contrast(0.96);
-      opacity: 0.94;
-    }
-    .hero-visuals .boy,
-    .hero-visuals-mobile .boy {
-      position: absolute;
-      bottom: -8%;
-      right: 8%;
-      height: 100%;
-      max-height: 750px;
-      width: auto;
-      z-index: 120;
-      filter: drop-shadow(-30px 20px 40px rgba(0,0,0,0.12));
-    }
-
-    /* Sections */
-    .section-animated {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .section-animated.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-header h2 {
-      font-family: Poppins, sans-serif;
-      font-weight: 800;
-      font-size: 40px;
-      color: #111;
-      margin: 0;
-    }
-    .section-header p {
-      color: #666;
-      font-size: 14px;
-      margin-top: 8px;
-    }
-    .btn-viewall {
-      background: #fff;
-      border: 1px solid #eee;
-      padding: 10px 14px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      color: #111;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-    }
-    .btn-viewall:hover {
-      background: #f9f9f9;
-      border-color: var(--primary);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
-      color: #111;
-    }
-
-    .section-img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 14px 30px rgba(11,12,14,0.06), 0 0 60px rgba(43, 154, 167, 0.15);
-      transition: all 0.4s ease;
-    }
-    .section-img:hover {
-      box-shadow: 0 20px 40px rgba(11,12,14,0.1), 0 0 80px rgba(43, 154, 167, 0.25);
-      transform: translateY(-4px);
-    }
-
-    /* FAQ */
-    .faq-visual img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 14px 30px rgba(11,12,14,0.06), 0 0 60px rgba(43, 154, 167, 0.15);
-      border: 1px solid #f3f3f3;
-      transition: all 0.4s ease;
-    }
-    .faq-visual img:hover {
-      box-shadow: 0 20px 40px rgba(11,12,14,0.1), 0 0 80px rgba(43, 154, 167, 0.25);
-      transform: translateY(-4px);
-    }
-    .faq-content h2 {
-      font-family: Poppins, sans-serif;
-      font-weight: 800;
-      font-size: 36px;
-      color: #111;
-    }
-    .faq-content p {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    .faq-action {
-      background: #fff;
-      border: 1px solid #eee;
-      padding: 10px 14px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      color: #111;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-block;
-      margin-top: 1rem;
-    }
-    .faq-action:hover {
-      background: #f9f9f9;
-      border-color: var(--primary);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
-      color: #111;
-    }
-
-    /* Footer */
-    .footer {
-      background: #fafafa;
-      padding: 40px 0;
-      margin-top: 3rem;
-    }
-    .footer-brand {
-      font-family: Poppins, sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      color: #111;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    .footer p {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .footer-links a {
-      color: #333;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      margin-right: 1.25rem;
-      transition: color 0.2s ease;
-    }
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-    .footer-cta {
-      background: #fff;
-      border: 1px solid #eee;
-      padding: 10px 14px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      color: #111;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    .footer-cta:hover {
-      background: #f9f9f9;
-      border-color: var(--primary);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
-      color: #111;
-    }
-    .footer-bottom {
-      text-align: center;
-      color: #999;
-      font-size: 13px;
-      padding-top: 1.5rem;
-      margin-top: 1.5rem;
-      border-top: 1px solid #f0f0f0;
-    }
-
-    /* Responsive - Tablet & Mobile */
-    @media (max-width: 991px) {
-      .hero-section {
-        min-height: auto;
-        margin-bottom: 500px;
-      }
-      .hero-content {
-        padding-bottom: 0;
-      }
-      
-      /* Mobile Visuals Container */
-      .hero-visuals-mobile {
-        display: block;
-        position: relative;
-        width: 100%;
-        height: 500px;
-        margin-top: 3rem;
-        pointer-events: none;
-      }
-      
-      .hero-visuals-mobile .boy {
-        position: absolute;
-        width: 50%;
-        max-width: 350px;
-        height: auto;
-        left: 50%;
-        right: auto;
-        bottom: 0;
-        transform: translateX(-50%);
-      }
-      .hero-visuals-mobile .frames-stack {
-        left: 50%;
-        top: auto;
-        bottom: 180px;
-        transform: translateX(-50%);
-        width: 260px;
-      }
-      .hero-visuals-mobile .plant {
-        display: block;
-        bottom: 0;
-        right: 5%;
-        width: 180px;
-        opacity: 0.8;
-      }
-      .hero-visuals-mobile .controller {
-        left: 8%;
-        top: 20%;
-        width: 90px;
-      }
-      .section-header h2 {
-        font-size: 28px;
-      }
-      .faq-content h2 {
-        font-size: 24px;
-      }
-    }
-
     @media (max-width: 767px) {
-      .navbar-brand {
-        font-size: 20px;
+      .faq-inner {
+        flex-direction: column !important;
       }
-      .hero-section {
-        margin-bottom: 450px;
-      }
-      .hero-visuals-mobile {
-        height: 450px;
-        margin-top: 2rem;
-      }
-      .hero-visuals-mobile .boy {
-        width: 55%;
-        max-width: 300px;
-      }
-      .hero-visuals-mobile .frames-stack {
-        width: 230px;
-        bottom: 160px;
-      }
-      .hero-visuals-mobile .plant {
-        width: 150px;
-        right: 3%;
-      }
-      .hero-visuals-mobile .controller {
-        width: 80px;
-        left: 5%;
-        top: 15%;
-      }
-      .section-header h2 {
-        font-size: 24px;
-      }
-      .faq-content h2 {
-        font-size: 20px;
-      }
-    }
-
-    @media (max-width: 575px) {
-      .hero-section {
-        margin-bottom: 400px;
-      }
-      .hero-visuals-mobile {
-        height: 400px;
-        margin-top: 1.5rem;
-      }
-      .hero-visuals-mobile .boy {
-        width: 58%;
-        max-width: 260px;
-      }
-      .hero-visuals-mobile .frames-stack {
-        width: 200px;
-        bottom: 140px;
-      }
-      .hero-visuals-mobile .plant {
-        width: 130px;
-      }
-      .hero-visuals-mobile .controller {
-        width: 70px;
-        left: 3%;
-      }
-      .section-header h2 {
-        font-size: 20px;
-      }
-      .faq-content h2 {
-        font-size: 18px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-section {
-        margin-bottom: 360px;
-      }
-      .hero-visuals-mobile {
-        height: 360px;
-      }
-      .hero-visuals-mobile .boy {
-        width: 60%;
-        max-width: 230px;
-      }
-      .hero-visuals-mobile .frames-stack {
-        width: 180px;
-        bottom: 120px;
-      }
-      .hero-visuals-mobile .plant {
-        width: 110px;
-      }
-      .hero-visuals-mobile .controller {
-        width: 60px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .hero-section {
-        margin-bottom: 320px;
-      }
-      .hero-visuals-mobile {
-        height: 320px;
-      }
-      .hero-visuals-mobile .boy {
-        width: 62%;
-        max-width: 200px;
-      }
-      .hero-visuals-mobile .frames-stack {
-        width: 160px;
-        bottom: 110px;
-      }
-      .hero-visuals-mobile .plant {
-        width: 95px;
-      }
-      .hero-visuals-mobile .controller {
-        width: 55px;
+      .faq-visual {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
+
   <header>
-    <nav class="navbar navbar-expand-lg bg-white">
-      <div class="container px-3 px-lg-5">
-        <a class="navbar-brand" href="#">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="12" fill="#2b9aa7"/>
-            <path d="M11 7L16 12L11 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>GlobalTalk</span>
-        </a>
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="brand navbar-brand" href="#">GlobalTalk</a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto me-auto">
+          <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="#">Main</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Guide</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Statistics</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Games</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Game 1</a></li>
-                <li><a class="dropdown-item" href="#">Game 2</a></li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Games <span style="font-size: 12px;">▼</span></a>
             </li>
           </ul>
-          <div class="d-flex gap-3 align-items-center">
-            <a class="btn-login" href="#">Login <i class="bi bi-arrow-right"></i></a>
-            <a class="btn-signup" href="#">Sign Up</a>
+          <div class="navbar-actions">
+            <a class="btn-login-nav" href="#">Login <span>→</span></a>
+            <a class="btn-signup-nav" href="#">Sign Up</a>
           </div>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- Main Content -->
   <main>
+    <section class="hero-section">
+      <div class="container">
+        <div class="row align-items-center">
+          
+          <div class="col-lg-5">
+            <span class="eyebrow">E-COURSE PLATFORM</span>
+            <h1 class="hero-title">
+              Learning and<br>
+              teaching online,<br>
+              made easy.
+            </h1>
+            <p class="hero-desc">
+              Gain subject certification or earn money while teaching online with GlobalTalk.
+            </p>
 
-  <!-- Hero -->
-  <section class="hero-section">
-    <div class="container px-3 px-lg-5">
-      <div class="row position-relative align-items-center">
-        <div class="col-12 col-lg-6 hero-content">
-          <div class="hero-left">
-            <img class="svg-headline" src="assets/images/Frame-4.svg" alt="Headline" />
-            <img class="svg-buttons" src="assets/images/Frame-7.svg" alt="Buttons" />
-            <img class="svg-stats" src="assets/images/Frame-8.svg" alt="Statistics" />
+            <div class="hero-actions d-flex align-items-center gap-3 mb-5">
+              <a href="#" class="link-signin">Sign In &rarr;</a>
+              <button class="btn-learn-more">Learn more &rarr;</button>
+            </div>
+
+            <div class="stats-container d-flex gap-4">
+              <div class="stat-item">
+                <div class="stat-num d-flex align-items-center gap-2">
+                  <svg class="bolt-icon" viewBox="0 0 24 24" fill="#2b9aa7">
+                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
+                  </svg>
+                  700+
+                </div>
+                <div class="stat-label">Hours of content</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num d-flex align-items-center gap-2">
+                  <svg class="bolt-icon" viewBox="0 0 24 24" fill="#2b9aa7">
+                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
+                  </svg>
+                  575k+
+                </div>
+                <div class="stat-label">Active Users</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="hero-img-container">
+              <img src="assets/images/controller.png" alt="" class="img-controller">
+              <img src="assets/images/boy.png" alt="Boy studying" class="img-boy">
+              <img src="assets/images/plant.png" alt="" class="img-plant">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits" class="benefits mt-5 py-4">
+      <div class="container">
+        <div class="benefits-header d-flex justify-content-between align-items-start gap-3 mb-3">
+          <div>
+            <h2 class="title">Benefits</h2>
+            <p class="desc mt-2">List of benefits that you could get at our courses.</p>
+          </div>
+          <a href="#" class="viewall">View All</a>
+        </div>
+        <img class="section-img" src="assets/images/benefits-section.png" alt="Benefits" />
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials mt-5 py-4">
+      <div class="container">
+        <div class="testimonials-header d-flex justify-content-between align-items-start gap-3 mb-3">
+          <div>
+            <h2 class="testimonials-title">Our Testimonials</h2>
+            <p class="testimonials-desc mt-2">Hear from learners who completed our courses.</p>
+          </div>
+          <a href="#" class="viewall">Read All</a>
+        </div>
+        <img class="section-img" src="assets/images/testimonials-section.png" alt="Testimonials" />
+      </div>
+    </section>
+
+    <section id="pricing" class="pricing mt-5 py-4">
+      <div class="container">
+        <div class="pricing-header d-flex justify-content-between align-items-start gap-3 mb-3">
+          <div>
+            <h2 class="pricing-title">Our Pricing</h2>
+            <p class="pricing-desc mt-2">Choose a plan that fits your learning goals.</p>
+          </div>
+          <a href="#" class="viewall">See Plans</a>
+        </div>
+        <img class="section-img" src="assets/images/pricing-section.png" alt="Pricing" />
+      </div>
+    </section>
+
+    <section id="faq" class="faq mt-5 py-4">
+      <div class="container">
+        <div class="faq-inner d-flex gap-4 align-items-start mt-3 flex-row-reverse">
+          <div class="faq-content flex-fill d-flex flex-column gap-3">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <p class="faq-desc">Quick answers to common questions about courses, payment, and access. If you still have questions, please contact our support team.</p>
+            <a href="#" class="faq-action">See FAQs</a>
+          </div>
+          <div class="faq-visual">
+            <img class="section-img" src="assets/images/faq-items.svg" alt="FAQ" />
           </div>
         </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer mt-5">
+    <div class="container">
+      <div class="footer-top d-flex justify-content-between flex-wrap gap-5">
+        <div class="footer-left">
+          <div class="brand mb-3">GlobalTalk</div>
+          <p class="footer-contact mb-2">
+            <i class="bi bi-envelope"></i> kevin@globaltalk.com
+          </p>
+          <p class="footer-contact mb-2">
+            <i class="bi bi-telephone"></i> +91 91813 23 2309
+          </p>
+          <p class="footer-contact">
+            <i class="bi bi-geo-alt"></i> Somewhere in the World
+          </p>
+        </div>
         
-        <div class="col-lg-6 d-none d-lg-block"></div>
+        <div class="footer-links-group">
+          <h5 class="footer-heading">Home</h5>
+          <a href="#benefits" class="footer-link d-block mb-2">Benefits</a>
+          <a href="#" class="footer-link d-block mb-2">Our Courses</a>
+          <a href="#testimonials" class="footer-link d-block mb-2">Our Testimonials</a>
+          <a href="#faq" class="footer-link d-block">Our FAQ</a>
+        </div>
         
-        <div class="hero-visuals d-none d-lg-block">
-          <div class="frames-stack">
-            <img class="svg-frame" src="assets/images/image-6.svg" alt="" />
-            <img class="svg-frame" src="assets/images/image-12.svg" alt="" />
+        <div class="footer-links-group">
+          <h5 class="footer-heading">About Us</h5>
+          <a href="#" class="footer-link d-block mb-2">Company</a>
+          <a href="#" class="footer-link d-block mb-2">Achievements</a>
+          <a href="#" class="footer-link d-block">Our Goals</a>
+        </div>
+        
+        <div class="footer-links-group">
+          <h5 class="footer-heading">Social Profiles</h5>
+          <div class="social-icons d-flex gap-3">
+            <a href="#" class="social-icon">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="bi bi-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="bi bi-linkedin"></i>
+            </a>
           </div>
-          <img class="controller" src="assets/images/controller.png" alt="Game Controller" />
-          <img class="boy" src="assets/images/boy.png" alt="Student" />
-          <img class="plant" src="assets/images/plant.png" alt="Plant" />
         </div>
       </div>
       
-      <!-- Mobile Hero Visuals -->
-      <div class="hero-visuals-mobile d-lg-none">
-        <div class="frames-stack">
-          <img class="svg-frame" src="assets/images/image-6.svg" alt="" />
-          <img class="svg-frame" src="assets/images/image-12.svg" alt="" />
-        </div>
-        <img class="controller" src="assets/images/controller.png" alt="Game Controller" />
-        <img class="boy" src="assets/images/boy.png" alt="Student" />
-        <img class="plant" src="assets/images/plant.png" alt="Plant" />
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefits -->
-  <section class="section-animated py-5">
-    <div class="container">
-      <div class="row align-items-center mb-3">
-        <div class="col-md-8">
-          <div class="section-header">
-            <h2>Benefits</h2>
-            <p>List of benefits that you could get at our courses.</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-md-end">
-          <a href="#" class="btn-viewall">View All</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <img class="section-img" src="assets/images/Benefits-Section.png" alt="Benefits" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="section-animated py-5">
-    <div class="container">
-      <div class="row align-items-center mb-3">
-        <div class="col-md-8">
-          <div class="section-header">
-            <h2>Our Testimonials</h2>
-            <p>Hear from learners who completed our courses.</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-md-end">
-          <a href="#" class="btn-viewall">Read All</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <img class="section-img" src="assets/images/2.png" alt="Testimonials" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="section-animated py-5">
-    <div class="container">
-      <div class="row align-items-center mb-3">
-        <div class="col-md-8">
-          <div class="section-header">
-            <h2>Our Pricing</h2>
-            <p>Choose a plan that fits your learning goals.</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-md-end">
-          <a href="#" class="btn-viewall">See Plans</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <img class="section-img" src="assets/images/3.png" alt="Pricing" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section-animated py-5">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-5 mb-4 mb-lg-0">
-          <div class="faq-visual">
-            <img src="assets/images/FAQ-Section.svg" alt="FAQ" />
-          </div>
-        </div>
-        <div class="col-lg-7">
-          <div class="faq-content">
-            <h2>Frequently Asked Questions</h2>
-            <p>Jawaban singkat atas pertanyaan umum tentang kursus, pembayaran, dan akses. Jika masih ada, hubungi tim dukungan kami.</p>
-            <a href="#" class="faq-action">See FAQs</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mb-4 mb-lg-0">
-          <div class="footer-brand">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="12" fill="#2b9aa7"/>
-              <path d="M11 7L16 12L11 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span>GlobalTalk</span>
-          </div>
-          <p>GlobalTalk helps students learn through interactive courses, hands-on tutorials, and an active community. Join us to improve your skills today.</p>
-          <div class="footer-links mt-3">
-            <a href="#">About</a>
-            <a href="#">Careers</a>
-            <a href="#">Blog</a>
-            <a href="#">Contact</a>
-          </div>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-          <div class="d-flex flex-row flex-lg-column gap-2 align-items-lg-end align-items-start">
-            <a class="footer-cta" href="#">Get Started</a>
-            <a class="footer-cta" href="#">Support</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        © <span id="year"></span> GlobalTalk. All rights reserved.
+      <div class="footer-bottom mt-5 text-center">
+        © <span id="year"></span> kevin. All rights reserved.
       </div>
     </div>
   </footer>
-  </main>
 
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){ 
+      var y = new Date().getFullYear(); 
+      document.getElementById('year').textContent = y; 
+    })();
 
-    // Scroll animation
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px'
-    };
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href.length > 1) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, observerOptions);
+    }, { threshold: 0.15 });
 
-    const sections = document.querySelectorAll('.section-animated');
-    sections.forEach(section => observer.observe(section));
+    document.querySelectorAll('.benefits, .testimonials, .pricing, .faq').forEach(section => observer.observe(section));
   </script>
 </body>
 </html>
