@@ -10,10 +10,16 @@
   --pricing-cta-end: #ff7a00;
 }
 
+/* --- FIX GLOBAL LAYOUT (PENTING UNTUK HP) --- */
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* Mencegah scroll horizontal penyebab layout rusak */
+  position: relative;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   color: #333;
-  overflow-x: hidden;
   background: #fff;
 }
 
@@ -34,6 +40,7 @@ a {
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease;
+  width: 100%; /* Pastikan navbar tidak melebihi lebar layar */
 }
 
 .brand {
@@ -264,14 +271,12 @@ a {
   background-color: #fff;
 }
 
-/* Flex Container for Split Layout */
 .faq-layout {
   display: flex;
   align-items: flex-start;
   gap: 80px; 
 }
 
-/* --- LEFT SIDE: Content --- */
 .faq-left {
   flex: 0 0 35%; 
   position: relative; 
@@ -305,8 +310,6 @@ a {
   transition: all 0.2s ease;
 }
 
-
-/* --- RIGHT SIDE: Accordion List --- */
 .faq-right {
   flex: 1; 
 }
@@ -326,11 +329,6 @@ a {
   transition: box-shadow 0.3s ease;
 }
 
-.faq-item:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
-
-/* Header: Question + Button */
 .faq-header {
   display: flex;
   justify-content: space-between;
@@ -351,12 +349,11 @@ a {
   padding-right: 20px;
 }
 
-/* Toggle Button Square */
 .faq-toggle {
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  background-color: #FFF4E8; /* Light peach bg */
+  background-color: #FFF4E8; 
   border-radius: 8px;
   border: none;
   display: flex;
@@ -372,7 +369,6 @@ a {
   font-weight: bold;
 }
 
-/* Body: Answer (Hidden by default) */
 .faq-body {
   display: none;
   margin-top: 24px;
@@ -387,7 +383,6 @@ a {
   margin-bottom: 20px;
 }
 
-/* Link box inside answer */
 .faq-link-wrapper {
   background-color: #F9F9F9;
   border-radius: 6px;
@@ -431,20 +426,20 @@ a {
 
 
 /* ==================================================== */
-/* ===== RESPONSIVE & MOBILE FIXES ==================== */
+/* ===== RESPONSIVE & MOBILE FIXES (FINAL) ============ */
 /* ==================================================== */
 
 /* Tablet & Mobile (max-width: 991px) */
 @media (max-width: 991px) {
   
-  /* 1. Navbar & Hero Layout */
+  /* Layout: Fix Navbar overlap & Align Center */
   .hero-section {
     padding-top: 120px; 
     padding-bottom: 60px;
     text-align: center; 
   }
 
-  /* 2. Judul & Deskripsi */
+  /* Typography alignment */
   .hero-title {
     font-size: 3rem; 
     margin-left: auto;
@@ -456,7 +451,7 @@ a {
     max-width: 100%;
   }
 
-  /* 3. Hero Actions & Stats Alignment */
+  /* Flex Alignment for Actions & Stats */
   .hero-actions {
     justify-content: center; 
     margin-bottom: 40px !important; 
@@ -473,55 +468,69 @@ a {
     padding-right: 0;
   }
   
-  /* 4. Hero Images */
+  /* --- HERO IMAGES (SAFE SCALING) --- */
+  /* Gunakan % dan posisi yang aman agar tidak "nempel kiri/kanan" atau keluar layar */
   .hero-img-container {
     height: auto;       
-    min-height: 400px;
-    margin-top: 40px;
-    width: 100%;
+    min-height: auto;
+    margin-top: 50px;
+    
+    width: 75%;         /* Kurangi lebar agar ada ruang margin kiri-kanan */
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    display: block;
+    position: relative; 
   }
 
   .img-boy {
-    height: 400px;
-    width: auto;
-    max-width: 100%;
+    width: 100%;        
+    height: auto;       
+    position: relative;
+    z-index: 2;
   }
   
   .img-controller {
-    height: 80px;
-    top: 5%;
-    left: 5%;
+    width: 25%;         
+    height: auto;       
+    
+    position: absolute;
+    top: 20%;           
+    left: -5%;         /* Posisi lebih aman (-5% tidak terlalu keluar) */
+    
+    transform: rotate(-15deg);
+    z-index: 1;
   }
   
   .img-plant {
-    height: 120px;
-    bottom: 0;
-    right: 0;
+    width: 40%;         
+    height: auto;       
+    
+    position: absolute;
+    bottom: -5%;        
+    right: -5%;        /* Posisi lebih aman */
+    
+    z-index: 3;
+    opacity: 1;
   }
+  /* ---------------------------------- */
 
-  /* 5. FAQ Responsive */
+  /* FAQ Responsive */
   .faq-layout {
     flex-direction: column;
-    gap: 40px;
+    gap: 50px;
   }
   .faq-left {
     text-align: center;
     width: 100%;
     position: static; 
   }
-  
-  /* --- FAQ Heading Fix for Mobile --- */
-  .faq-heading {
-    font-size: 32px;
-  }
-  /* Pastikan <br> tetap berfungsi sebagai pemisah baris/spasi agar teks tidak nempel */
-  .faq-heading br { 
-    display: inline; 
-  }
-  
+  .faq-heading { font-size: 32px; }
+  .faq-heading br { display: inline; }
   .faq-right { width: 100%; }
 
-  /* 6. Grid Adjustments */
+  /* Grid Adjustments */
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-grid, .pricing-grid { grid-template-columns: 1fr; }
 }
@@ -532,7 +541,6 @@ a {
     font-size: 2.5rem;
   }
 
-  /* Stack stats vertical */
   .stats-container {
     flex-direction: column;
     gap: 20px !important;
@@ -551,12 +559,10 @@ a {
     border-bottom: none;
   }
 
-  /* Benefits Grid 1 column */
   .benefits-grid { grid-template-columns: 1fr; }
   .benefit-cta { bottom: 20px !important; right: 20px !important; }
   .benefit { padding: 20px; }
   
-  /* FAQ Font Size */
   .faq-q { font-size: 16px; }
   .faq-heading { font-size: 28px; }
 }
@@ -574,43 +580,43 @@ a {
   transition: all 0.3s ease;
 }
 .benefit-cta:hover {
-  background-color: #FF9B20;      /* Background jadi Orange */
+  background-color: #FF9B20;      
   border-color: #FF9B20;
-  box-shadow: 0 8px 20px rgba(255, 155, 32, 0.4); /* Efek bersinar */
-  transform: scale(1.1);          /* Membesar sedikit */
+  box-shadow: 0 8px 20px rgba(255, 155, 32, 0.4); 
+  transform: scale(1.1);          
 }
 .benefit-cta:hover i {
-  color: #fff;                    /* Icon jadi Putih */
+  color: #fff;                    
   transform: rotate(45deg) translate(2px, -2px);
 }
 
 /* 2. Testimonials Button ("Read Full Story") */
 .btn-small:hover {
-  background-color: #FF9B20 !important; /* Background Orange */
+  background-color: #FF9B20 !important; 
   border-color: #FF9B20 !important;
-  color: #fff !important;               /* Teks Putih */
+  color: #fff !important;               
   box-shadow: 0 6px 15px rgba(255, 155, 32, 0.25);
-  transform: translateY(-3px);          /* Naik sedikit */
+  transform: translateY(-3px);          
 }
 
 /* 3. Pricing Button ("Get Started") */
 .btn-cta:hover {
-  transform: translateY(-4px);          /* Naik lebih tinggi */
-  box-shadow: 0 15px 35px rgba(255, 122, 0, 0.35); /* Shadow lebih tebal */
-  filter: brightness(1.1);              /* Warna sedikit lebih terang */
+  transform: translateY(-4px);          
+  box-shadow: 0 15px 35px rgba(255, 122, 0, 0.35); 
+  filter: brightness(1.1);              
 }
 
 /* 4. FAQ "See All" Button */
 .faq-see-all:hover {
-  background-color: #111;               /* Background Hitam */
+  background-color: #111;               
   border-color: #111;
-  color: #fff;                          /* Teks Putih */
+  color: #fff;                          
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
   transform: translateY(-2px);
 }
 
 /* 5. FAQ Toggle Button (+ Icon) */
 .faq-toggle:hover {
-  background-color: #ffd699;            /* Peach lebih gelap */
-  transform: scale(1.1);                /* Membesar sedikit */
+  background-color: #ffd699;            
+  transform: scale(1.1);                
 }
